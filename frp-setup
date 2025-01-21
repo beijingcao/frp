@@ -1,0 +1,56 @@
+https://github.com/fatedier/frp/releases
+
+===========================server端===========================
+[common]
+bind_port = 8055
+authentication_method = token
+token = 2ffa69079239ebda0
+dashboard_port = 8056
+dashboard_user = user_261a
+dashboard_pwd = 850f643760
+
+===========================client端===========================
+# 指定frp服务端的公网ip和监听端口
+serverAddr = "142.171.236.20"
+serverPort = 8055
+# token要与frp服务端保持一致
+auth.token = "2ffa69079239ebda040d1"
+
+# 创建一个用于CS2或L4D2的代理
+[[proxies]]
+# 给这个代理起个自己喜欢的名字
+name = "alist-frp"
+# 指定此代理使用udp协议
+type = "tcp"
+# 指定游戏服务器的局域网ip和端口
+# CS2和L4D2服务器默认使用27015端口，也可修改成其他端口
+localIp = "192.168.0.18"
+localPort = 5244
+# 指定使用frp服务端的6100端口来转发frp客户端27015端口的数据
+remotePort = 5245
+#customDomains = ["gczx.work"]
+
+[[proxies]]
+name = "ssh-frp"
+type = "tcp"
+localIp = "192.168.0.18"
+localPort = 3389
+remotePort = 1234
+
+#######################
+客户端部署时需要用的参数
+服务IP: 142.171.236.20
+token: 2ffa69079239d1
+
+FRP面板信息
+FRP面板地址: http://142.171.236.20:8056
+FRP面板用户名: user_261
+FRP面板密码: 850f6437
+
+########################.bat文件：########################
+@echo off
+f:
+cd F:\frp_windows
+frpc -c frpc.toml
+exit
+
